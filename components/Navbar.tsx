@@ -6,6 +6,7 @@ import React from 'react'
 
 async function Navbar() {
   const session = await auth()
+  console.log("session",session);
   return (
     <header className='px-5 py-3 bg-white shadow-sm font-work-sans'>
       <nav className='flex justify-between items-center'>
@@ -20,9 +21,8 @@ async function Navbar() {
               </Link>
               <form action={async () => {
                 "use server";
-                await signOut({options: { redirectTo: "/"}});
+                await signOut({ redirectTo: "/"});
               }}>
-
               <button type='submit'>Logout</button>
               </form>
               
@@ -33,7 +33,7 @@ async function Navbar() {
           ) : ( 
             <form action={async () => {
               "use server"
-              await signIn({ provider: 'github' });
+              await signIn('github');
             }}>
               <button type='submit'>Login</button>
             </form>
